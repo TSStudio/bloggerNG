@@ -1,0 +1,135 @@
+body {
+    margin: 0;
+    background-color: #e5e7eb;
+}
+#app,
+#container-main {
+    height: 100%;
+}
+@font-face {
+    font-family: "iconfont"; /* Project id 3232227 */
+    src: url("https://at.alicdn.com/t/c/font_3232227_jbq0h73l12b.woff2?t=1692081101961")
+            format("woff2"),
+        url("https://at.alicdn.com/t/c/font_3232227_jbq0h73l12b.woff?t=1692081101961")
+            format("woff"),
+        url("https://at.alicdn.com/t/c/font_3232227_jbq0h73l12b.ttf?t=1692081101961")
+            format("truetype");
+}
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 32px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+.iconfont-small {
+    font-family: "iconfont" !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#function-selector {
+    padding: 10px;
+    font-size: 0;
+    cursor: default;
+}
+.page {
+    font-size: 16px;
+    display: inline-block;
+    padding: 20px;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: color 0.2s, background-color 0.2s;
+}
+.page:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.page-selected {
+    color: #009c4e;
+}
+@media screen and (max-width: 600px) {
+    #content {
+        width: 100%;
+        margin: 0 auto 30px auto;
+    }
+}
+@media screen and (min-width: 600px) {
+    #content {
+        width: 60%;
+        margin: 0 auto 70px auto;
+        margin: 10px auto 30px auto;
+    }
+}
+#content {
+    transition: all 250ms ease-in-out;
+    background-color: #fff;
+    border-radius: 20px;
+}
+.topInfo {
+    text-align: center;
+    font-size: 3em;
+    font-family: "思源黑体 CN", "思源黑体", "黑体", sans-serif;
+    font-weight: lighter;
+}
+#pageInfo,
+.division {
+    margin: 0 auto 20px auto;
+    text-align: center;
+    font-size: 2em;
+    font-family: "思源黑体 CN", "思源黑体", "黑体", sans-serif;
+    font-weight: lighter;
+}
+.passagebutton {
+    box-sizing: border-box;
+    cursor: pointer;
+    width: 100%;
+    border-top: 2px solid #cccccc;
+    padding: 5px;
+}
+.titlebutton {
+    font-family: "思源黑体 CN", "思源黑体", "黑体", sans-serif;
+    font-weight: lighter;
+    font-size: 1.5em;
+    margin: 0;
+}
+.datetime {
+    margin: 0.2em 0;
+    color: #cc9900;
+    font-size: 0.7em;
+}
+.cnt-txt {
+    padding: 15px;
+}
+.actionbar {
+    margin: 0;
+    border-top: solid 1px #cccccc;
+    padding: 10px;
+}
+.action-button {
+    padding: 10px 20px 10px 20px;
+    border-radius: 8px;
+    background-color: #00af5c;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+    font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC,
+        Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC,
+        WenQuanYi Micro Hei, sans-serif;
+}
+.action-button:hover {
+    background-color: #009c4e;
+}
+#read {
+    margin-bottom: 0px;
+    padding: 10px;
+}
+.katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
