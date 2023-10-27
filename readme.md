@@ -1,4 +1,6 @@
-# Fudan Toolbox - A tool collection for Fudan University
+# BloggerNG
+
+BloggerNG is a simple and efficient blog system designed to help users create and manage their personal blogs. This repository contains the codebase for the Blogger application, allowing users to easily set up and customize their own blogs.
 
 ## To develop
 
@@ -9,7 +11,3 @@ To debug, run
 `npm run serve`
 
 To contribute, simply issue a pull request.
-
-## Just to use
-
-The deployment is at [Cloudflare Pages](https://toolbox.fudan.cl15.top), automatically update to the latest main branch.
