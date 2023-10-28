@@ -35,7 +35,7 @@
                 }"
                 @click="handleClick('contact')"
             >
-                联系我
+                关于
             </div>
         </div>
     </div>

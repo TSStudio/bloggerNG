@@ -127,5 +127,4 @@ dist
 .pnp.*
 
 
-backend/calendar/db.php
 package-lock.json

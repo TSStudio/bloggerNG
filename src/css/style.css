@@ -133,3 +133,16 @@ body {
     overflow-x: auto;
     overflow-y: hidden;
 }
+.beian {
+    background-color: #222222;
+    bottom: 0;
+    height: 30px;
+    width: 100%;
+    text-align: center;
+}
+.beiana {
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    display: inline;
+}

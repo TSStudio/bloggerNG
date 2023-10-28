@@ -9,6 +9,7 @@
         :passageId="readingPassage"
         ref="reader"
     ></read>
+    <beian></beian>
 </template>
 
 <script>
@@ -16,6 +17,7 @@ import pageHeader from "./components/pageHeader.vue";
 import contents from "./components/contents.vue";
 import contact from "./components/contact.vue";
 import read from "./components/read.vue";
+import beian from "./components/beian.vue";
 
 export default {
     data() {
@@ -30,6 +32,7 @@ export default {
         contents,
         contact,
         read,
+        beian,
     },
     methods: {
         handleClick(tab, event) {},
