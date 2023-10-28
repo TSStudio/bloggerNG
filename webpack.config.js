@@ -12,6 +12,20 @@ module.exports = {
             { test: /\.vue$/, use: "vue-loader" },
             { test: /\.css$/, use: ["vue-style-loader", "css-loader"] },
             { test: /\.js$/, use: "babel-loader" },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: "asset/resource",
+                generator: {
+                    filename: "imgs/[hash][ext]",
+                },
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                type: "asset/resource",
+                generator: {
+                    filename: "fonts/[hash][ext]",
+                },
+            },
         ],
     },
     plugins: [
