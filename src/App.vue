@@ -9,6 +9,11 @@
         :passageId="readingPassage"
         ref="reader"
     ></read>
+    <editor
+        v-if="currentFunction == 'editor'"
+        :passageId="readingPassage"
+        ref="editor"
+    ></editor>
     <beian></beian>
 </template>
 
@@ -18,6 +23,7 @@ import contents from "./components/contents.vue";
 import contact from "./components/contact.vue";
 import read from "./components/read.vue";
 import beian from "./components/beian.vue";
+import editor from "./components/editor.vue";
 
 export default {
     data() {
@@ -33,6 +39,7 @@ export default {
         contact,
         read,
         beian,
+        editor,
     },
     methods: {
         handleClick(tab, event) {},
