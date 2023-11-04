@@ -32,6 +32,30 @@ export class TAPInterface {
     constructor() {
         this.endpoint = "https://www.tmysam.top/blogger/apis/";
     }
+    postEssay(id, title, content, callback = () => {}) {
+        //https://www.tmysam.top/blogger/apis/postEssayNG.php
+        //POST application/json
+        // {id, title, content} id0 for new
+        let url = this.endpoint + "postEssayNG.php";
+        let data = {
+            id: id,
+            title: title,
+            content: content,
+        };
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify(data),
+        }).then((response) => {
+            response.json().then((json) => {
+                callback(json);
+                console.log(json);
+            });
+        });
+    }
     datetimeparser(timestamp) {
         let d = new Date();
         d.setTime(timestamp * 1000);
@@ -77,6 +101,18 @@ export class TAPInterface {
             .then((response) => {
                 response.json().then((json) => {
                     callback(json.content);
+                });
+            })
+            .catch((error) => {
+                errorHandler(error);
+            });
+    }
+    getPassageECandTitle(passageId, callback, errorHandler) {
+        let url = this.endpoint + "getPassage.php?id=" + passageId;
+        fetch(url)
+            .then((response) => {
+                response.json().then((json) => {
+                    callback(json.content, json.title);
                 });
             })
             .catch((error) => {

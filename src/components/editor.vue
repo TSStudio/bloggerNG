@@ -16,20 +16,21 @@
                 >
             </template>
         </el-result>
-        <div v-show="curFunction == 'code'">
+        <div v-show="curFunction == 'code' && hasPermission">
             <div class="topInfo">代码编辑器 of 文章{{ editingPassage }}</div>
             <div class="cnt-txt">
                 <el-button type="primary" size="medium" @click="preview()"
                     >预览</el-button
                 >
             </div>
+            标题：<input type="text" v-model="title" />
             <textarea
                 ref="codearea"
                 style="width: 100%; height: 800px; box-sizing: border-box"
                 v-model="curEssayCode"
             ></textarea>
         </div>
-        <div v-show="curFunction == 'preview'">
+        <div v-show="curFunction == 'preview' && hasPermission">
             <div class="topInfo">预览 of 文章{{ editingPassage }}</div>
             <div class="cnt-txt">
                 <el-button type="primary" size="medium" @click="code()"
@@ -43,6 +44,13 @@
                 >
             </div>
         </div>
+        <el-button
+            type="primary"
+            size="medium"
+            v-show="hasPermission"
+            @click="postEssay()"
+            >发布</el-button
+        >
     </div>
 </template>
 
@@ -61,6 +69,7 @@ export default {
             editingPassage: "0",
             curEssayCode: "",
             curFunction: "code",
+            title: "",
         };
     },
     methods: {
@@ -85,6 +94,7 @@ export default {
                                 "您没有权限发布文章。这要求您在权限节点：blogger_essay_post上有值为1的权限。";
                         }
                     }
+                    this.isCheckingPermission = false;
                 })
                 .catch((error) => {
                     console.log(error);
@@ -96,9 +106,22 @@ export default {
         getEssayCode() {
             if (this.editingPassage == "0") return;
             let api = new tapi.TAPInterface();
-            api.getPassageEC(this.editingPassage, (passage) => {
+            api.getPassageECandTitle(this.editingPassage, (passage, title) => {
                 this.curEssayCode = passage;
+                this.title = title;
             });
+        },
+        postEssay() {
+            //api.postEssay(id, title, content)
+            let api = new tapi.TAPInterface();
+            api.postEssay(
+                this.editingPassage,
+                this.title,
+                this.curEssayCode,
+                (response) => {
+                    if (response.id) this.editingPassage = response.id;
+                }
+            );
         },
         preview() {
             this.curFunction = "preview";
