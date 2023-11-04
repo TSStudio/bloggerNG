@@ -37,6 +37,15 @@
             >
                 关于
             </div>
+            <div
+                :class="{
+                    page: true,
+                    'page-selected': currentFunction == 'editor',
+                }"
+                @click="handleClick('editor')"
+            >
+                文章编辑器
+            </div>
         </div>
     </div>
 </template>
