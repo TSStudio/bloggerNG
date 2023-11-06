@@ -61,7 +61,7 @@ export class essayCodeParser {
                 ";";
             this.inlabelstyle = lastfontstyle
                 .replace(/%/, ",")
-                .replace(/"/, "&quot;");
+                .replace(/\"/, "&quot;");
             return (
                 '</span></p><p style="' +
                 this.lastpstyle +
@@ -101,7 +101,7 @@ export class essayCodeParser {
             ";";
         this.inlabelstyle = lastfontstyle
             .replace(/%/, ",")
-            .replace(/"/, "&quot;");
+            .replace(/\"/, "&quot;");
         return '</span><span style="' + this.inlabelstyle + '">';
     }
     image_parser(t) {
@@ -394,7 +394,7 @@ export class essayCodeParser {
             ";font-family:" +
             this.dargs[5] +
             ";";
-        this.inlabelstyle = lastfontstyle.replace(/"/, "&quot;");
+        this.inlabelstyle = lastfontstyle.replace(/\"/, "&quot;");
         //protects formulas and codes
         //str = str.replace(/`[\s\S]*?`/g, this.inlineprocessor);
         // this will be undefined
