@@ -2,13 +2,13 @@ const endpoint = "https://www.tmysam.top/blogger/apis/";
 
 Date.prototype.format = function (fmt) {
     var o = {
-        "M+": this.getMonth() + 1, //月份
-        "d+": this.getDate(), //日
-        "h+": this.getHours(), //小时
-        "m+": this.getMinutes(), //分
-        "s+": this.getSeconds(), //秒
-        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-        S: this.getMilliseconds(), //毫秒
+        "M+": this.getMonth() + 1,
+        "d+": this.getDate(),
+        "h+": this.getHours(),
+        "m+": this.getMinutes(),
+        "s+": this.getSeconds(),
+        "q+": Math.floor((this.getMonth() + 3) / 3),
+        S: this.getMilliseconds(),
     };
     if (/(y+)/.test(fmt)) {
         fmt = fmt.replace(
@@ -33,9 +33,6 @@ export class TAPInterface {
         this.endpoint = "https://www.tmysam.top/blogger/apis/";
     }
     postEssay(id, title, content, callback = () => {}) {
-        //https://www.tmysam.top/blogger/apis/postEssayNG.php
-        //POST application/json
-        // {id, title, content} id0 for new
         let url = this.endpoint + "postEssayNG.php";
         let data = {
             id: id,
