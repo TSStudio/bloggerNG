@@ -11,7 +11,7 @@
                     type="primary"
                     size="medium"
                     @click="check_permission()"
-                    disabled="isCheckingPermission"
+                    :disabled="isCheckingPermission"
                     >重试</el-button
                 >
             </template>
