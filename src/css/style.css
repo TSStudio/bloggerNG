@@ -146,3 +146,22 @@ body {
     text-align: center;
     display: inline;
 }
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: rgb(10, 10, 10);
+        color: white;
+    }
+    #content {
+        background-color: rgb(40, 40, 40);
+    }
+    .action-button {
+        color: white;
+        background-color: rgb(80, 80, 60);
+    }
+    .action-button:hover {
+        background-color: rgb(122, 122, 97);
+    }
+    .page:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}

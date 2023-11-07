@@ -16,14 +16,22 @@ export class essayCodeParser {
     lastpstyle = "text-align:justify;";
     inlabelstyle = "";
     curLang = "";
-    constructor() {
-        this.defaultfontstyle[0] = "15px";
-        this.defaultfontstyle[1] = "normal";
-        this.defaultfontstyle[2] = "#000000";
-        this.defaultfontstyle[3] = "justify";
-        this.defaultfontstyle[4] = "none";
-        this.defaultfontstyle[5] =
-            "-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif";
+    constructor(defaultfontstyle = []) {
+        if (defaultfontstyle.length < 6) {
+            this.defaultfontstyle[0] = "15px";
+            this.defaultfontstyle[1] = "normal";
+            if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                this.defaultfontstyle[2] = "#FFFFFF";
+            } else {
+                this.defaultfontstyle[2] = "#000000";
+            }
+            this.defaultfontstyle[3] = "justify";
+            this.defaultfontstyle[4] = "none";
+            this.defaultfontstyle[5] =
+                "-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif";
+        } else {
+            this.defaultfontstyle = defaultfontstyle;
+        }
     }
     setfontstyle(t) {
         t = t.replace(/[\(\)]/g, "");
