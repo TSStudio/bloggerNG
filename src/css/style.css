@@ -156,10 +156,10 @@ body {
     }
     .action-button {
         color: white;
-        background-color: rgb(80, 80, 60);
+        background-color: #004223;
     }
     .action-button:hover {
-        background-color: rgb(122, 122, 97);
+        background-color: rgb(0, 91, 48);
     }
     .page:hover {
         background-color: rgba(255, 255, 255, 0.1);
