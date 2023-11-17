@@ -24,7 +24,7 @@
                     page: true,
                     'page-selected': currentFunction == 'toolbox',
                 }"
-                onclick="window.open('https:\/\/toolbox.fudan.cl15.top/','_blank');"
+                onclick="window.open('https:\/\/tool.tmysam.top/','_blank');"
             >
                 工具箱<i class="iconfont-small">&#xe67d;</i>
             </div>
