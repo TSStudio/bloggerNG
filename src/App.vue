@@ -1,5 +1,8 @@
 <template>
-    <pageHeader v-model:currentFunction="currentFunction"></pageHeader>
+    <pageHeader
+        v-model:currentFunction="currentFunction"
+        v-model:currentMode="currentMode"
+    ></pageHeader>
     <contents
         v-show="currentFunction == 'blog' && currentBlogFunction == 'contents'"
     ></contents>
@@ -30,6 +33,7 @@ export default {
         return {
             currentBlogFunction: "contents",
             currentFunction: "blog",
+            currentMode: "light",
             readingPassage: "0",
         };
     },
@@ -55,6 +59,19 @@ export default {
             }
             this.currentFunction = fun;
         },
+        switchDarkMode() {
+            if (this.currentMode == "light") {
+                this.currentMode = "dark";
+                document.documentElement.classList.add("dark");
+            } else {
+                this.currentMode = "light";
+                document.documentElement.classList.remove("dark");
+            }
+            this.$refs.reader.reParse();
+            if (this.$refs.editor) {
+                this.$refs.editor.reParse();
+            }
+        },
         getQueryVariable(variable) {
             var query = window.location.search.substring(1);
             var vars = query.split("&");
@@ -71,6 +88,10 @@ export default {
         let id = this.getQueryVariable("tid");
         if (id) {
             this.readPassage(id);
+        }
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            this.currentMode = "dark";
+            document.documentElement.classList.add("dark");
         }
     },
 };

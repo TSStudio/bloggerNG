@@ -16,11 +16,11 @@ export class essayCodeParser {
     lastpstyle = "text-align:justify;";
     inlabelstyle = "";
     curLang = "";
-    constructor(defaultfontstyle = []) {
+    constructor(defaultfontstyle = [], darkmode = false) {
         if (defaultfontstyle.length < 6) {
             this.defaultfontstyle[0] = "15px";
             this.defaultfontstyle[1] = "normal";
-            if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            if (darkmode) {
                 this.defaultfontstyle[2] = "#FFFFFF";
             } else {
                 this.defaultfontstyle[2] = "#000000";

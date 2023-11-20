@@ -104,6 +104,7 @@ export default {
                 });
         },
         getEssayCode() {
+            if (!this.hasPermission) return;
             if (this.editingPassage == "0") return;
             let api = new tapi.TAPInterface();
             api.getPassageECandTitle(this.editingPassage, (passage, title) => {
@@ -112,6 +113,7 @@ export default {
             });
         },
         postEssay() {
+            if (!this.hasPermission) return;
             //api.postEssay(id, title, content)
             let api = new tapi.TAPInterface();
             api.postEssay(
@@ -123,10 +125,9 @@ export default {
                 }
             );
         },
-        preview() {
-            this.curFunction = "preview";
-            let parser = new ncp.essayCodeParser();
-            let html = parser.parse(this.curEssayCode);
+        parseOnly(passage) {
+            if (!this.hasPermission) return;
+            let html = parser.parse(passage);
             this.$refs.readHtmlContainer.innerHTML = html;
             hljs.highlightAll();
             renderMathInElement(
@@ -142,6 +143,19 @@ export default {
                     this.errorhandler(e);
                 }
             );
+        },
+        preview() {
+            if (!this.hasPermission) return;
+            this.curFunction = "preview";
+            let parser = new ncp.essayCodeParser(
+                [],
+                this.$parent.currentMode == "dark"
+            );
+            this.parseOnly(parser.parse(this.curEssayCode));
+        },
+        reParse() {
+            if (!this.hasPermission) return;
+            this.parseOnly(this.curEssayCode);
         },
         code() {
             this.curFunction = "code";

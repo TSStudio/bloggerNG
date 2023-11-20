@@ -32,6 +32,8 @@ export default {
     data() {
         return {
             isLoading: false,
+            cachedPassage: "",
+            cachedId: "",
         };
     },
     props: {
@@ -45,33 +47,48 @@ export default {
         backtoContents() {
             this.$parent.currentBlogFunction = "contents";
         },
+        parseOnly(passage) {
+            let parser = new ncp.essayCodeParser(
+                [],
+                this.$parent.currentMode == "dark"
+            );
+            let html = parser.parse(passage);
+            // katex.render(html, this.$refs.readHtmlContainer, {
+            //     throwOnError: false,
+            // });
+            this.$refs.readHtmlContainer.innerHTML = html;
+            hljs.highlightAll();
+            renderMathInElement(
+                this.$refs.readHtmlContainer,
+                {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                    ],
+                    throwOnError: false,
+                },
+                (e) => {
+                    this.errorhandler(e);
+                }
+            );
+        },
         fetchandparse() {
             if (this.passageId == "0") return;
+            if (this.isLoading) return;
             this.isLoading = true;
             let api = new tapi.TAPInterface();
             api.getPassageEC(this.passageId, (passage) => {
-                let parser = new ncp.essayCodeParser();
-                let html = parser.parse(passage);
-                // katex.render(html, this.$refs.readHtmlContainer, {
-                //     throwOnError: false,
-                // });
-                this.$refs.readHtmlContainer.innerHTML = html;
-                hljs.highlightAll();
-                renderMathInElement(
-                    this.$refs.readHtmlContainer,
-                    {
-                        delimiters: [
-                            { left: "$$", right: "$$", display: true },
-                            { left: "$", right: "$", display: false },
-                        ],
-                        throwOnError: false,
-                    },
-                    (e) => {
-                        this.errorhandler(e);
-                    }
-                );
+                this.cachedPassage = passage;
+                this.cachedId = this.passageId;
+                this.parseOnly(passage);
                 this.isLoading = false;
             });
+        },
+        reParse() {
+            if (this.passageId == "0") return;
+            if (this.cachedPassage == "") this.fetchandparse();
+            if (this.cachedId != this.passageId) this.fetchandparse();
+            this.parseOnly(this.cachedPassage);
         },
         errorhandler(e) {
             this.$notify({

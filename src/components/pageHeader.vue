@@ -47,12 +47,24 @@
                 文章编辑器
             </div>
         </div>
+        <div id="darkmode-toggle">
+            <div class="toggle" @click="handleToggle()">
+                <i class="iconfont">{{
+                    currentMode == "light" ? "&#xe64a;" : "&#xe613;"
+                }}</i>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
     props: {
+        currentMode: {
+            type: String,
+            default: "light",
+            required: false,
+        },
         currentFunction: {
             type: String,
             default: "blog",
@@ -63,6 +75,9 @@ export default {
         handleClick(tab) {
             //run parent switchCurrentFunction
             this.$parent.switchCurrentFunction(tab);
+        },
+        handleToggle() {
+            this.$parent.switchDarkMode();
         },
     },
 };

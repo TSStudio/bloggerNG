@@ -1,6 +1,27 @@
+html {
+    --body-bg-color: #e5e7eb;
+    --body-color: #000;
+    --content-bg-color: #fff;
+    --actionbutton-color: #fff;
+    --actionbutton-bg-color: #00af5c;
+    --actionbutton-hover-bg-color: #009c4e;
+    --page-hover-bg-color: rgba(0, 0, 0, 0.1);
+}
+html.dark {
+    --body-bg-color: rgb(10, 10, 10);
+    --body-color: #fff;
+    --content-bg-color: rgb(40, 40, 40);
+    --actionbutton-color: #fff;
+    --actionbutton-bg-color: #004223;
+    --actionbutton-hover-bg-color: rgb(0, 91, 48);
+    --page-hover-bg-color: rgba(255, 255, 255, 0.1);
+}
+
 body {
     margin: 0;
-    background-color: #e5e7eb;
+    color: var(--body-color);
+    background-color: var(--body-bg-color);
+    transition: background-color 0.2s linear, color 0.2s linear;
 }
 #app,
 #container-main {
@@ -8,11 +29,11 @@ body {
 }
 @font-face {
     font-family: "iconfont"; /* Project id 3232227 */
-    src: url("https://at.alicdn.com/t/c/font_3232227_jbq0h73l12b.woff2?t=1692081101961")
+    src: url("//at.alicdn.com/t/c/font_3232227_qtee8ntvx2o.woff2?t=1700481741639")
             format("woff2"),
-        url("https://at.alicdn.com/t/c/font_3232227_jbq0h73l12b.woff?t=1692081101961")
+        url("//at.alicdn.com/t/c/font_3232227_qtee8ntvx2o.woff?t=1700481741639")
             format("woff"),
-        url("https://at.alicdn.com/t/c/font_3232227_jbq0h73l12b.ttf?t=1692081101961")
+        url("//at.alicdn.com/t/c/font_3232227_qtee8ntvx2o.ttf?t=1700481741639")
             format("truetype");
 }
 .iconfont {
@@ -30,8 +51,20 @@ body {
     -webkit-text-stroke-width: 0.2px;
     -moz-osx-font-smoothing: grayscale;
 }
-
+#navigation {
+    display: flex;
+}
 #function-selector {
+    display: flex;
+    justify-content: flex-start;
+    flex: 1;
+    padding: 10px;
+    font-size: 0;
+    cursor: default;
+}
+#darkmode-toggle {
+    display: flex;
+    justify-content: flex-end;
     padding: 10px;
     font-size: 0;
     cursor: default;
@@ -44,8 +77,20 @@ body {
     margin-right: 5px;
     transition: color 0.2s, background-color 0.2s;
 }
-.page:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+.toggle {
+    font-size: 16px;
+    display: inline-block;
+    padding: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: color 0.2s, background-color 0.2s;
+}
+.page:hover,
+.toggle:hover {
+    background-color: var(--page-hover-bg-color);
 }
 .page-selected {
     color: #009c4e;
@@ -65,8 +110,9 @@ body {
 }
 #content {
     transition: all 250ms ease-in-out;
-    background-color: #fff;
+    background-color: var(--content-bg-color);
     border-radius: 20px;
+    transition: background-color 0.2s linear, color 0.2s linear;
 }
 .topInfo {
     text-align: center;
@@ -111,9 +157,9 @@ body {
 .action-button {
     padding: 10px 20px 10px 20px;
     border-radius: 8px;
-    background-color: #00af5c;
+    background-color: var(--actionbutton-bg-color);
     border: none;
-    color: #fff;
+    color: var(--actionbutton-color);
     cursor: pointer;
     text-decoration: none;
     transition: all 0.2s;
@@ -123,7 +169,7 @@ body {
         WenQuanYi Micro Hei, sans-serif;
 }
 .action-button:hover {
-    background-color: #009c4e;
+    background-color: var(--actionbutton-hover-bg-color);
 }
 #read {
     margin-bottom: 0px;
@@ -145,23 +191,4 @@ body {
     text-decoration: none;
     text-align: center;
     display: inline;
-}
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: rgb(10, 10, 10);
-        color: white;
-    }
-    #content {
-        background-color: rgb(40, 40, 40);
-    }
-    .action-button {
-        color: white;
-        background-color: #004223;
-    }
-    .action-button:hover {
-        background-color: rgb(0, 91, 48);
-    }
-    .page:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-    }
 }
