@@ -1,6 +1,6 @@
 {
     "dependencies": {
-        "element-plus": "^2.2.26",
+        "element-plus": "^2.4.2",
         "highlight.js": "^11.9.0",
         "katex": "^0.16.9",
         "vconsole": "^3.15.0",
