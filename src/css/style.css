@@ -29,11 +29,11 @@ body {
 }
 @font-face {
     font-family: "iconfont"; /* Project id 3232227 */
-    src: url("//at.alicdn.com/t/c/font_3232227_qtee8ntvx2o.woff2?t=1700481741639")
+    src: url("//at.alicdn.com/t/c/font_3232227_2lzlw6y34a.woff2?t=1700642355611")
             format("woff2"),
-        url("//at.alicdn.com/t/c/font_3232227_qtee8ntvx2o.woff?t=1700481741639")
+        url("//at.alicdn.com/t/c/font_3232227_2lzlw6y34a.woff?t=1700642355611")
             format("woff"),
-        url("//at.alicdn.com/t/c/font_3232227_qtee8ntvx2o.ttf?t=1700481741639")
+        url("//at.alicdn.com/t/c/font_3232227_2lzlw6y34a.ttf?t=1700642355611")
             format("truetype");
 }
 .iconfont {
@@ -128,6 +128,12 @@ body {
     font-family: "思源黑体 CN", "思源黑体", "黑体", sans-serif;
     font-weight: lighter;
 }
+#filter {
+    display: flex;
+    justify-content: center;
+    font-size: 0.7em;
+    color: #cc9900;
+}
 .passagebutton {
     box-sizing: border-box;
     cursor: pointer;
@@ -145,6 +151,22 @@ body {
     margin: 0.2em 0;
     color: #cc9900;
     font-size: 0.7em;
+}
+.tag {
+    display: inline-block;
+    margin-left: 5px;
+    border-radius: 100px;
+    padding: 2px 5px 2px 5px;
+    background-color: rgba(211, 160, 0, 0.1);
+    border: solid 1px rgba(211, 160, 0, 0.5);
+    transition: color 0.2s linear, background-color 0.2s linear;
+}
+.tag-clickable {
+    cursor: pointer;
+}
+.tag-selected {
+    background-color: rgb(211, 158, 0);
+    color: #fff;
 }
 .cnt-txt {
     padding: 15px;

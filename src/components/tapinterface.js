@@ -58,7 +58,7 @@ export class TAPInterface {
         d.setTime(timestamp * 1000);
         return d.format("yyyy-MM-dd hh:mm:ss");
     }
-    loadcontents(page = 1, callback, errorHandler) {
+    loadcontents(page = 1, callback, errorHandler, tags = []) {
         let curPage = page;
         let url = "";
         if (page == 1) {
@@ -68,6 +68,9 @@ export class TAPInterface {
                 this.endpoint +
                 "getContents.php?from=" +
                 (10 * (page - 1)).toString();
+        }
+        if (tags.length > 0) {
+            url += "&filter=" + tags.join(",");
         }
         fetch(url)
             .then((response) => {
@@ -88,6 +91,12 @@ export class TAPInterface {
             essayCard.passageId = element.id;
             essayCard.title = element.title;
             essayCard.timeLastModified = this.datetimeparser(element.lastedit);
+            essayCard.hasTags = element.hasTags;
+            if (element.hasTags) {
+                essayCard.tags = element.tags;
+            } else {
+                essayCard.tags = [];
+            }
             essayCards.push(essayCard);
         });
         callback(essayCards);
@@ -115,5 +124,19 @@ export class TAPInterface {
             .catch((error) => {
                 errorHandler(error);
             });
+    }
+    getTags() {
+        let url = this.endpoint + "getTags.php";
+        return new Promise((resolve, reject) => {
+            fetch(url)
+                .then((response) => {
+                    response.json().then((json) => {
+                        resolve(json);
+                    });
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
     }
 }
