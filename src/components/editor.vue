@@ -85,6 +85,7 @@ export default {
                 .then((data) => {
                     if (data.status == 0 && data.result == 1) {
                         this.hasPermission = true;
+                        this.getEssayCode();
                     } else {
                         if (data.status != 0) {
                             this.noPermissionReason =
@@ -127,6 +128,10 @@ export default {
         },
         parseOnly(passage) {
             if (!this.hasPermission) return;
+            let parser = new ncp.essayCodeParser(
+                [],
+                this.$parent.currentMode == "dark"
+            );
             let html = parser.parse(passage);
             this.$refs.readHtmlContainer.innerHTML = html;
             hljs.highlightAll();
@@ -147,11 +152,7 @@ export default {
         preview() {
             if (!this.hasPermission) return;
             this.curFunction = "preview";
-            let parser = new ncp.essayCodeParser(
-                [],
-                this.$parent.currentMode == "dark"
-            );
-            this.parseOnly(parser.parse(this.curEssayCode));
+            this.parseOnly(this.curEssayCode);
         },
         reParse() {
             if (!this.hasPermission) return;
@@ -166,7 +167,6 @@ export default {
         if (this.$parent.currentBlogFunction == "read") {
             this.editingPassage = this.$parent.readingPassage;
         }
-        this.getEssayCode();
     },
 };
 </script>
