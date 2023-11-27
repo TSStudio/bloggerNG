@@ -130,6 +130,7 @@ body {
 }
 #filter {
     display: flex;
+    margin-bottom: 5px;
     justify-content: center;
     font-size: 0.7em;
     color: #cc9900;
