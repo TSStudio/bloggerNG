@@ -11,7 +11,7 @@
                 @click="handleClick(tag)"
             ></tag>
         </div>
-        <div id="passagelist">
+        <div id="passagelist" v-loading="isLoading">
             <essayCard
                 v-for="passage in passageList"
                 :datetimeStr="passage.timeLastModified"
@@ -34,10 +34,12 @@ export default {
         return {
             passageList: [],
             tags: [],
+            isLoading: false,
         };
     },
     methods: {
         setPassageList(newPassageList) {
+            this.isLoading = false;
             this.passageList = newPassageList;
         },
         readPassage(id) {
@@ -64,6 +66,7 @@ export default {
                     tagids.push(tag.tagid);
                 }
             }
+            this.isLoading = true;
             api.loadcontents(
                 1,
                 this.setPassageList,
@@ -80,6 +83,7 @@ export default {
     },
     mounted() {
         let api = new tapi.TAPInterface();
+        this.isLoading = true;
         api.loadcontents(1, this.setPassageList, (e) => {
             this.errorhandler(e);
         });
