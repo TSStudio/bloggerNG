@@ -19,7 +19,7 @@
         "css-loader": "^6.7.3",
         "dotenv-webpack": "^8.0.1",
         "html-webpack-plugin": "^5.5.0",
-        "unplugin-auto-import": "^0.12.1",
+        "unplugin-auto-import": "^0.17.1",
         "unplugin-vue-components": "^0.25.2",
         "vue-loader": "^17.3.1",
         "vue-style-loader": "^4.1.3",
