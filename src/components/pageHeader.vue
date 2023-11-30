@@ -46,6 +46,15 @@
             >
                 文章编辑器
             </div>
+            <div
+                :class="{
+                    page: true,
+                    'page-selected': currentFunction == 'tagEditor',
+                }"
+                @click="handleClick('tagEditor')"
+            >
+                标签编辑器
+            </div>
         </div>
         <div id="darkmode-toggle">
             <div class="toggle" @click="handleToggle()">

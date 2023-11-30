@@ -139,4 +139,27 @@ export class TAPInterface {
                 });
         });
     }
+    tagUtil(tagName, tid, operation = "new") {
+        let url =
+            this.endpoint +
+            "tagUtil.php?operation=" +
+            operation +
+            "&tid=" +
+            tid +
+            "&tagName=" +
+            tagName;
+        return new Promise((resolve, reject) => {
+            fetch(url, {
+                credentials: "include",
+            })
+                .then((response) => {
+                    response.json().then((json) => {
+                        resolve(json);
+                    });
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+    }
 }

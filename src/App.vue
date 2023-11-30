@@ -17,6 +17,10 @@
         :passageId="readingPassage"
         ref="editor"
     ></editor>
+    <tagEditor
+        v-if="currentFunction == 'tagEditor'"
+        ref="tagEditor"
+    ></tagEditor>
     <beian></beian>
 </template>
 
@@ -27,6 +31,7 @@ import contact from "./components/contact.vue";
 import read from "./components/read.vue";
 import beian from "./components/beian.vue";
 import editor from "./components/editor.vue";
+import tagEditor from "./components/tagEditor.vue";
 
 export default {
     data() {
@@ -44,6 +49,7 @@ export default {
         read,
         beian,
         editor,
+        tagEditor,
     },
     methods: {
         handleClick(tab, event) {},
