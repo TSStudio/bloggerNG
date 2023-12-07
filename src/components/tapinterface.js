@@ -1,4 +1,5 @@
 const endpoint = "https://www.tmysam.top/blogger/apis/";
+const ssoServiceEndpoint = "https://account.tmysam.top/apis/";
 
 Date.prototype.format = function (fmt) {
     var o = {
@@ -164,7 +165,7 @@ export class TAPInterface {
     }
     checkPermission(permissionName) {
         let url =
-            this.endpoint +
+            ssoServiceEndpoint +
             "sso-interface.php?operation=6&permission=" +
             permissionName;
         return new Promise((resolve, reject) => {
