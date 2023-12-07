@@ -79,25 +79,14 @@ export default {
         check_permission(override = false) {
             if (this.isCheckingPermission && !override) return;
             this.isCheckingPermission = true;
-            const url =
-                "https://account.tmysam.top/apis/sso-interface.php?operation=6&permission=blogger_tag_edit";
-            fetch(url, { credentials: "include" })
-                .then((response) => {
-                    return response.json();
-                })
-                .then((data) => {
-                    if (data.status == 0 && data.result == 1) {
+            let api = new tapi.TAPInterface();
+            api.checkPermission("blogger_tag_edit")
+                .then((result) => {
+                    if (result.permission) {
                         this.hasPermission = true;
                     } else {
-                        if (data.status != 0) {
-                            this.noPermissionReason =
-                                "未登录或邮件未验证，请在 TSStudio UAS(Universal Authentication System) 登录并验证邮件后重试。";
-                        } else {
-                            this.noPermissionReason =
-                                "您没有权限发布文章。这要求您在权限节点：blogger_tag_edit上有值为1的权限。";
-                        }
+                        this.noPermissionReason = result.noPermissionReason;
                     }
-                    this.isCheckingPermission = false;
                 })
                 .catch((error) => {
                     console.log(error);

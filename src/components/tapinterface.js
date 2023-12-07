@@ -162,4 +162,40 @@ export class TAPInterface {
                 });
         });
     }
+    checkPermission(permissionName) {
+        let url =
+            this.endpoint +
+            "sso-interface.php?operation=6&permission=" +
+            permissionName;
+        return new Promise((resolve, reject) => {
+            fetch(url, { credentials: "include" })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    if (data.status == 0 && data.result == 1) {
+                        resolve({ permission: true });
+                    } else {
+                        if (data.status != 0) {
+                            resolve({
+                                permission: false,
+                                noPermissionReason:
+                                    "未登录或邮件未验证，请在 TSStudio UAS(Universal Authentication System) 登录并验证邮件后重试。",
+                            });
+                        } else {
+                            resolve({
+                                permission: false,
+                                noPermissionReason:
+                                    "您没有权限。这要求您在权限节点：" +
+                                    permissionName +
+                                    "上有值为1的权限。",
+                            });
+                        }
+                    }
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+    }
 }
