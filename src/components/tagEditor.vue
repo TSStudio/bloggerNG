@@ -16,8 +16,8 @@
                 >
             </template>
         </el-result>
-        <div v-if="hasPermission">
-            <div>
+        <div v-if="hasPermission" v-loading="loading">
+            <div class="tagManager">
                 <p v-if="curTID == 0">请选择一个文章进行编辑</p>
                 <p v-if="curTID != 0">
                     选择的文章：{{ curTID }}({{ curPassage.title }})
@@ -27,6 +27,8 @@
                         v-if="curPassage.hasTags"
                         v-for="tag in curPassage.tags"
                         :taginfo="tag + '(点击删除)'"
+                        @click="removeTag(tag, curTID)"
+                        class="tag-in-editor"
                     ></tag>
 
                     <el-input
@@ -62,6 +64,7 @@ import tag from "./tag.vue";
 export default {
     data() {
         return {
+            loading: true,
             hasPermission: false,
             noPermissionReason: "正在检查您的权限，请稍等",
             isCheckingPermission: true,
@@ -96,24 +99,25 @@ export default {
                 });
         },
         setPassageList(newPassageList) {
-            this.isLoading = false;
+            this.loading = false;
             this.passageList = newPassageList;
             if (this.curTID != 0) {
                 this.readPassage(this.curTID);
             }
         },
         errorhandler(e) {
-            this.$notify({
+            ElNotification({
                 title: "错误",
                 message: e.message,
                 duration: 0,
             });
         },
         removeTag(tagName, tid) {
+            this.loading = true;
             let api = new tapi.TAPInterface();
             api.tagUtil(tagName, tid, "remove").then((res) => {
                 if (res.status == 0) {
-                    this.$notify({
+                    ElNotification({
                         title: "成功",
                         message: "标签已删除",
                         duration: 0,
@@ -123,7 +127,7 @@ export default {
                         this.errorhandler(e);
                     });
                 } else {
-                    this.$notify({
+                    ElNotification({
                         title: "错误",
                         message: res.message,
                         duration: 0,
@@ -132,10 +136,11 @@ export default {
             });
         },
         newTag(tagName, tid) {
+            this.loading = true;
             let api = new tapi.TAPInterface();
             api.tagUtil(tagName, tid, "new").then((res) => {
                 if (res.status == 0) {
-                    this.$notify({
+                    ElNotification({
                         title: "成功",
                         message: "标签已添加",
                         duration: 0,
@@ -145,7 +150,7 @@ export default {
                         this.errorhandler(e);
                     });
                 } else {
-                    this.$notify({
+                    ElNotification({
                         title: "错误",
                         message: res.message,
                         duration: 0,
