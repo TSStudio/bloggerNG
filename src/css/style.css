@@ -216,3 +216,11 @@ body {
     text-align: center;
     display: inline;
 }
+.tagManager {
+    padding: 5px;
+}
+.tag-in-editor {
+    color: #cc9900;
+    cursor: pointer;
+    font-size: 0.7em;
+}

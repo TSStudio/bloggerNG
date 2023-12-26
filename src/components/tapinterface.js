@@ -1,4 +1,5 @@
 const endpoint = "https://www.tmysam.top/blogger/apis/";
+const ssoServiceEndpoint = "https://account.tmysam.top/apis/";
 
 Date.prototype.format = function (fmt) {
     var o = {
@@ -133,6 +134,65 @@ export class TAPInterface {
                     response.json().then((json) => {
                         resolve(json);
                     });
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+    }
+    tagUtil(tagName, tid, operation = "new") {
+        let url =
+            this.endpoint +
+            "tagUtil.php?operation=" +
+            operation +
+            "&tid=" +
+            tid +
+            "&tagName=" +
+            tagName;
+        return new Promise((resolve, reject) => {
+            fetch(url, {
+                credentials: "include",
+            })
+                .then((response) => {
+                    response.json().then((json) => {
+                        resolve(json);
+                    });
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+    }
+    checkPermission(permissionName) {
+        let url =
+            ssoServiceEndpoint +
+            "sso-interface.php?operation=6&permission=" +
+            permissionName;
+        return new Promise((resolve, reject) => {
+            fetch(url, { credentials: "include" })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    if (data.status == 0 && data.result == 1) {
+                        resolve({ permission: true });
+                    } else {
+                        if (data.status != 0) {
+                            resolve({
+                                permission: false,
+                                noPermissionReason:
+                                    "未登录或邮件未验证，请在 TSStudio UAS(Universal Authentication System) 登录并验证邮件后重试。",
+                            });
+                        } else {
+                            resolve({
+                                permission: false,
+                                noPermissionReason:
+                                    "您没有权限。这要求您在权限节点：" +
+                                    permissionName +
+                                    "上有值为1的权限。",
+                            });
+                        }
+                    }
                 })
                 .catch((error) => {
                     reject(error);
