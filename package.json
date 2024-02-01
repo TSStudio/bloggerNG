@@ -11,7 +11,7 @@
     "description": "New Generation of Blogger",
     "main": "index.js",
     "devDependencies": {
-        "@babel/core": "^7.23.5",
+        "@babel/core": "^7.23.9",
         "@babel/preset-env": "^7.23.5",
         "@types/katex": "^0.16.7",
         "babel-loader": "^9.1.0",
