@@ -23,9 +23,9 @@
     </div>
 </template>
 <script>
-//import * as ncp from "./essayCode.js";
-import essayCodeParser from "essaycode-parser/src/parser.js";
+import * as ncp from "./essayCode.js";
 import * as tapi from "./tapinterface.js";
+import katex from "katex";
 import renderMathInElement from "katex/dist/contrib/auto-render.mjs";
 import hljs from "highlight.js";
 export default {
@@ -48,26 +48,15 @@ export default {
             this.$parent.currentBlogFunction = "contents";
         },
         parseOnly(passage) {
-            // let parser = new ncp.essayCodeParser(
-            //     [],
-            //     this.$parent.currentMode == "dark"
-            // );
-            // let html = parser.parse(passage);
+            let parser = new ncp.essayCodeParser(
+                [],
+                this.$parent.currentMode == "dark"
+            );
+            let html = parser.parse(passage);
             // katex.render(html, this.$refs.readHtmlContainer, {
             //     throwOnError: false,
             // });
-            let parser = new essayCodeParser();
-            if (this.$parent.currentMode == "dark") {
-                parser.defaultFontStyle.color = "#ffffff";
-            }
-            parser.parse(passage);
-            let dom = parser.root.generateDOMElem();
-            while (this.$refs.readHtmlContainer.firstChild) {
-                this.$refs.readHtmlContainer.removeChild(
-                    this.$refs.readHtmlContainer.firstChild
-                );
-            }
-            this.$refs.readHtmlContainer.appendChild(dom);
+            this.$refs.readHtmlContainer.innerHTML = html;
             hljs.highlightAll();
             renderMathInElement(
                 this.$refs.readHtmlContainer,
