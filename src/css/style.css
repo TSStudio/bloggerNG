@@ -173,6 +173,11 @@ body {
 .cnt-txt {
     padding: 15px;
 }
+.footer {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
 .actionbar {
     margin: 0;
     border-top: solid 1px #cccccc;

@@ -89,7 +89,7 @@ export class TAPInterface {
         let essayCards = [];
         contents.articles.forEach((element) => {
             let essayCard = new Object();
-            essayCard.passageId = element.id;
+            essayCard.passageId = element.id.toString();
             essayCard.title = element.title;
             essayCard.timeLastModified = this.datetimeparser(element.lastedit);
             essayCard.hasTags = element.hasTags;
@@ -100,7 +100,7 @@ export class TAPInterface {
             }
             essayCards.push(essayCard);
         });
-        callback(essayCards);
+        callback(essayCards, Math.ceil(contents.total / 10));
     }
     getPassageEC(passageId, callback, errorHandler) {
         let url = this.endpoint + "getPassage.php?id=" + passageId;

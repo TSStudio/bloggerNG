@@ -11,7 +11,9 @@
 <script>
 import tag from "./tag.vue";
 export default {
-    data() {},
+    data() {
+        return {};
+    },
     components: {
         tag,
     },

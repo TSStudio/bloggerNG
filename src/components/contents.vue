@@ -21,6 +21,13 @@
                 :tags="passage.tags"
             ></essayCard>
         </div>
+        <div class="footer">
+            <pagination
+                :currentPageNumber="currentPageNumber"
+                :totalPages="totalPages"
+                @selectPage="selectPage"
+            ></pagination>
+        </div>
     </div>
 </template>
 
@@ -28,6 +35,7 @@
 import * as tapi from "./tapinterface.js";
 import essayCard from "./essayCard.vue";
 import tag from "./tag.vue";
+import pagination from "./pagination.vue";
 
 export default {
     data() {
@@ -35,17 +43,26 @@ export default {
             passageList: [],
             tags: [],
             isLoading: false,
+            currentPageNumber: 1,
+            totalPages: 1,
         };
     },
     methods: {
-        setPassageList(newPassageList) {
+        setPassageList(newPassageList, totalPages = 1) {
             this.isLoading = false;
             this.passageList = newPassageList;
+            this.totalPages = totalPages;
+            console.log("total pages:" + this.totalPages);
         },
         readPassage(id) {
-            //console.log("readPassage" + id);
-            //this.$emit("readPassage", id);
             this.$parent.readPassage(id);
+        },
+        selectPage(pageNumber) {
+            if (pageNumber == this.currentPageNumber) {
+                return;
+            }
+            this.currentPageNumber = pageNumber;
+            this.loadcontentsWithFilter();
         },
         errorhandler(e) {
             this.$notify({
@@ -56,6 +73,7 @@ export default {
         },
         handleClick(tag) {
             tag.selected = !tag.selected;
+            this.currentPageNumber = 1;
             this.loadcontentsWithFilter();
         },
         loadcontentsWithFilter() {
@@ -68,7 +86,7 @@ export default {
             }
             this.isLoading = true;
             api.loadcontents(
-                1,
+                this.currentPageNumber,
                 this.setPassageList,
                 (e) => {
                     this.errorhandler(e);
@@ -80,6 +98,7 @@ export default {
     components: {
         essayCard,
         tag,
+        pagination,
     },
     mounted() {
         let api = new tapi.TAPInterface();

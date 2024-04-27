@@ -43,7 +43,7 @@
                     >
                 </div>
             </div>
-            <div id="passagelist" v-loading="isLoading">
+            <div id="passagelist">
                 <essayCard
                     v-for="passage in passageList"
                     :datetimeStr="passage.timeLastModified"
@@ -53,6 +53,13 @@
                     :tags="passage.tags"
                 ></essayCard>
             </div>
+            <div class="footer">
+                <pagination
+                    :currentPageNumber="currentPageNumber"
+                    :totalPages="totalPages"
+                    @selectPage="selectPage"
+                ></pagination>
+            </div>
         </div>
     </div>
 </template>
@@ -61,6 +68,8 @@
 import * as tapi from "./tapinterface.js";
 import essayCard from "./essayCard.vue";
 import tag from "./tag.vue";
+import pagination from "./pagination.vue";
+
 export default {
     data() {
         return {
@@ -72,6 +81,8 @@ export default {
             curPassage: {},
             curTID: 0,
             input: "",
+            currentPageNumber: 1,
+            totalPages: 1,
         };
     },
     components: {
@@ -79,6 +90,13 @@ export default {
         tag,
     },
     methods: {
+        selectPage(pageNumber) {
+            if (pageNumber == this.currentPageNumber) {
+                return;
+            }
+            this.currentPageNumber = pageNumber;
+            this.loadcontents();
+        },
         check_permission(override = false) {
             if (this.isCheckingPermission && !override) return;
             this.isCheckingPermission = true;
@@ -98,9 +116,10 @@ export default {
                     this.isCheckingPermission = false;
                 });
         },
-        setPassageList(newPassageList) {
+        setPassageList(newPassageList, totalPages = 1) {
             this.loading = false;
             this.passageList = newPassageList;
+            this.totalPages = totalPages;
             if (this.curTID != 0) {
                 this.readPassage(this.curTID);
             }
@@ -166,6 +185,17 @@ export default {
                     break;
                 }
             }
+        },
+        loadcontents() {
+            let api = new tapi.TAPInterface();
+            this.loading = true;
+            api.loadcontents(
+                this.currentPageNumber,
+                this.setPassageList,
+                (e) => {
+                    this.errorhandler(e);
+                }
+            );
         },
     },
     mounted() {
