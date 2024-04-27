@@ -13,11 +13,11 @@
                 >EssayCode</a
             >&nbsp;
             <a
-                href="https://github.com/TSStudio/essayCode-javascript-parser"
+                href="https://github.com/TSStudio/essaycode-parser"
                 id="ECJSPButton"
                 class="action-button"
                 target="_blank"
-                >ECJsParser</a
+                >ECParser</a
             >
         </div>
     </div>
