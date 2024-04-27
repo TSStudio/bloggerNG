@@ -1,6 +1,7 @@
 <template>
     <el-button
         type="primary"
+        class="pageButton"
         v-if="currentPageNumber == thisButtonPageNumber"
         >{{ thisButtonPageNumber }}</el-button
     >
