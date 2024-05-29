@@ -16,6 +16,7 @@
                     'page-selected': currentFunction == 'status',
                 }"
                 onclick="window.open('https:\/\/stats.uptimerobot.com/qnqGkT1Bry','_blank');"
+                v-if="permission"
             >
                 网站状态<i class="iconfont-small">&#xe67d;</i>
             </div>
@@ -25,6 +26,7 @@
                     'page-selected': currentFunction == 'toolbox',
                 }"
                 onclick="window.open('https:\/\/tool.tmysam.top/','_blank');"
+                v-if="permission"
             >
                 工具箱<i class="iconfont-small">&#xe67d;</i>
             </div>
@@ -43,6 +45,7 @@
                     'page-selected': currentFunction == 'editor',
                 }"
                 @click="handleClick('editor')"
+                v-if="permission"
             >
                 文章编辑器
             </div>
@@ -52,6 +55,7 @@
                     'page-selected': currentFunction == 'tagEditor',
                 }"
                 @click="handleClick('tagEditor')"
+                v-if="permission"
             >
                 标签编辑器
             </div>
@@ -67,6 +71,7 @@
 </template>
 
 <script>
+import * as tapi from "./tapinterface.js";
 export default {
     props: {
         currentMode: {
@@ -80,6 +85,11 @@ export default {
             required: false,
         },
     },
+    data() {
+        return {
+            permission: false,
+        };
+    },
     methods: {
         handleClick(tab) {
             //run parent switchCurrentFunction
@@ -88,6 +98,12 @@ export default {
         handleToggle() {
             this.$parent.switchDarkMode();
         },
+    },
+    mounted() {
+        let api = new tapi.TAPInterface();
+        api.checkPermission("blogger").then((res) => {
+            this.permission = res.permission;
+        });
     },
 };
 </script>
