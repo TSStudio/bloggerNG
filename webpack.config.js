@@ -1,7 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
-const AutoImport = require("unplugin-auto-import/webpack");
-const Components = require("unplugin-vue-components/webpack");
 const { ElementPlusResolver } = require("unplugin-vue-components/resolvers");
 const { EnvironmentPlugin } = require("webpack");
 
@@ -33,10 +31,10 @@ module.exports = {
             template: "./src/index.html",
         }),
         new VueLoaderPlugin(),
-        AutoImport({
+        require("unplugin-auto-import/webpack").default({
             resolvers: [ElementPlusResolver()],
         }),
-        Components({
+        require("unplugin-vue-components/webpack").default({
             resolvers: [ElementPlusResolver()],
         }),
         new EnvironmentPlugin({
