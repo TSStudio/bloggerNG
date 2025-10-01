@@ -1,6 +1,6 @@
 {
     "dependencies": {
-        "element-plus": "^2.11.0",
+        "element-plus": "^2.11.4",
         "essaycode-parser": "^2.0.3",
         "highlight.js": "^11.11.1",
         "katex": "^0.16.22",
