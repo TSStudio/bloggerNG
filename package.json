@@ -12,7 +12,7 @@
     "description": "New Generation of Blogger",
     "main": "index.js",
     "devDependencies": {
-        "@babel/core": "^7.28.0",
+        "@babel/core": "^7.28.4",
         "@babel/preset-env": "^7.28.0",
         "@types/katex": "^0.16.7",
         "babel-loader": "^10.0.0",
