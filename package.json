@@ -3,7 +3,7 @@
         "element-plus": "^2.13.0",
         "essaycode-parser": "^2.0.3",
         "highlight.js": "^11.11.1",
-        "katex": "^0.16.25",
+        "katex": "^0.16.27",
         "vconsole": "^3.15.0",
         "vue": "^3.5.26"
     },
