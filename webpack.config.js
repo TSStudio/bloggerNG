@@ -2,6 +2,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
 const { ElementPlusResolver } = require("unplugin-vue-components/resolvers");
 const { EnvironmentPlugin } = require("webpack");
+const unpluginautoimport = require("unplugin-auto-import/webpack");
+const unpluginvuecomponents = require("unplugin-vue-components/webpack");
 
 module.exports = {
     entry: "./src/main.js",
@@ -31,10 +33,10 @@ module.exports = {
             template: "./src/index.html",
         }),
         new VueLoaderPlugin(),
-        require("unplugin-auto-import/webpack").default({
+        unpluginautoimport({
             resolvers: [ElementPlusResolver()],
         }),
-        require("unplugin-vue-components/webpack").default({
+        unpluginvuecomponents({
             resolvers: [ElementPlusResolver()],
         }),
         new EnvironmentPlugin({
